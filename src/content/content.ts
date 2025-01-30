@@ -141,18 +141,19 @@ export const content: WebsiteContent = {
     title: "We make change happen.",
     statistics: [
       {
-        stat: "5,000 Tons",
+        stat: "4000+ Bricks",
+        description: "Production Per Day",
+        isRollingNumber: true,
+      },
+      {
+        stat: "5,000+ Tons",
         description: "Waste diverted from landfills",
         isRollingNumber: true,
       },
       {
-        stat: "500,000 kg",
+        stat: "500,000+ kg",
         description: "Industrial ash transformed into products",
         isRollingNumber: true,
-      },
-      {
-        stat: "Zero-Waste",
-        description: "communities supported",
       },
     ],
   },
@@ -160,6 +161,21 @@ export const content: WebsiteContent = {
     id: "faq",
     title: "Frequently Asked Questions",
     questions: [
+      {
+        question: "How can I place an order for EcoBricks or other products?",
+        answer:
+          "To place an order, contact us via email at help@fsws.in or call us at +91 90688 55443. Our team will assist you with pricing, product specifications, and delivery options.",
+      },
+      {
+        question: "How do EcoBricks benefit the environment?",
+        answer:
+          "EcoBricks utilize industrial byproducts like ash and ETP-sludge, reducing waste and minimizing the use of natural resources.",
+      },
+      {
+        question: "Are EcoBricks compliant with construction standards?",
+        answer:
+          "Yes, EcoBricks are designed to meet industry standards for strength and reliability, making them suitable for various construction projects.",
+      },
       {
         question: "What types of waste do you manage?",
         answer:
@@ -179,16 +195,6 @@ export const content: WebsiteContent = {
         question: "How do your waste audits work?",
         answer:
           "Our waste audits analyze your current waste disposal practices to identify areas for improvement. We provide actionable recommendations to reduce waste, enhance recycling, and lower overall costs.",
-      },
-      {
-        question: "What industries do you serve?",
-        answer:
-          "We cater to a wide range of industries including manufacturing, construction, retail, hospitality, and more. If you're unsure, contact us and we'll discuss how we can support your business.",
-      },
-      {
-        question: "Can you help us achieve zero waste?",
-        answer:
-          "Absolutely. Our zero-waste consulting services guide you through the process of minimizing waste generation and increasing recycling to reach your sustainability goals.",
       },
       {
         question:
