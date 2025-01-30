@@ -33,6 +33,8 @@ export default function ServicesSection({ id }: { id: string }) {
     </Box>
   );
 }
+
+
 const SingleService = ({ title, description, image }: ServiceCard) => {
   const bg = useColorModeValue("brand.100", "brand.900");
   const backdrop = useColorModeValue("whiteAlpha.700", "blackAlpha.800");

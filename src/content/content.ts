@@ -9,6 +9,7 @@ export const content: WebsiteContent = {
     logo: "FSWS",
     navigation: [
       { name: "About Us", href: "about", icon: RiBuilding2Fill },
+      { name: "Products", href: "products", icon: FaUser },
       { name: "Services", href: "services", icon: FaUser },
       { name: "Why Us?", href: "why-us", icon: FaSchool },
       { name: "FAQs", href: "faq", icon: BsQuestion },
@@ -56,6 +57,54 @@ export const content: WebsiteContent = {
     title: "Who We Are",
     description:
       "First Source Waste Solutions is a leading provider of waste management services. We help businesses reduce waste, recycle efficiently, and achieve their sustainability goals. Our team of experts works closely with clients to develop customized waste management solutions that are cost-effective and environmentally friendly.",
+  },
+  productSection: {
+    id: "products",
+    title: "Our Products",
+    description:
+      "Innovative, eco-friendly products that transform waste into valuable resources.",
+
+    cards: [
+      {
+        title: "EcoBricks",
+        description:
+          "Durable, sustainable building materials made from boiler ash. Made to last and perfect for construction projects.",
+        images: [
+          // "/assets/products/ecobricks-1.png",
+          "/assets/products/ecobricks-2.png",
+          "/assets/products/ecobricks-3.png",
+        ],
+      },
+      {
+        title: "TerraPots",
+        description:
+          "Ash-based flowerpots designed for durability and sustainability. Available in multiple shapes and sizes for gardens and landscaping.",
+        images: [
+          "/assets/products/terrapot-1.png",
+          // "/assets/products/terrapot-2.png",
+          "/assets/products/terrapot-3.png",
+        ],
+      },
+      {
+        title: "SolidBench",
+        description:
+          "Durable benches made from ash. Built to last and perfect for outdoor and public spaces.",
+        images: [
+          "/assets/products/solidbench-1.png",
+          "/assets/products/solidbench-2.png",
+        ],
+      },
+      {
+        title: "AshWall",
+        description:
+          "Custom walls constructed with EcoBricks. Strong, reliable, and visually appealing for landscaping and construction needs.",
+        images: [
+          "/assets/products/ashwall-1.png",
+          // "/assets/products/ashwall-2.png",
+        ],
+        pills: ["Custom Order"],
+      },
+    ],
   },
   servicesSection: {
     id: "services",
@@ -183,11 +232,11 @@ export const content: WebsiteContent = {
         href: "tel:+919068855443",
       },
       {
-        name:"Alternate Phone",
-        value:"+91 74095 16090",
-        href:"tel:+917409516090",
+        name: "Alternate Phone",
+        value: "+91 74095 16090",
+        href: "tel:+917409516090",
         icon: FaPhone,
-      }
+      },
     ],
   },
   footer: {

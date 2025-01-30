@@ -38,6 +38,20 @@ export interface AboutSection {
   description: string;
 }
 
+export interface ProductCard {
+  title: string;
+  description: string;
+  images: string[];
+  pills?: string[];
+}
+
+export interface ProductSection {
+  id: string;
+  title: string;
+  description: string;
+  cards: ProductCard[];
+}
+
 export interface ServiceCard {
   title: string;
   description: string;
@@ -107,6 +121,7 @@ export interface WebsiteContent {
   clientsSection: ClientsSection;
   aboutSection: AboutSection;
   heroSection: HeroSection;
+  productSection: ProductSection;
   servicesSection: ServicesSection;
   impactSection: ImpactSection;
   faqSection: FAQSection;
