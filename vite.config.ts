@@ -10,6 +10,9 @@ export default defineConfig({
       analytics: {
         id: "G-FJ9XLLJSNQ",
       },
+      gtm: {
+        id: "GTM-T85B8426",
+      },
     }),
   ],
 });
