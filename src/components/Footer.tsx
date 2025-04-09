@@ -26,6 +26,10 @@ export const Footer = () => {
 };
 
 const BrandedDivider = () => {
+  const logo = useColorModeValue(
+    "/assets/FSWS-green.png",
+    "/assets/FSWS-green-lite.png"
+  );
   const borderColor = useColorModeValue("brand.200", "brand.700");
   return (
     <Stack
@@ -38,7 +42,8 @@ const BrandedDivider = () => {
     >
       <Box w={"full"} h={"1px"} bg={borderColor} />
       <Image
-        src={"/assets/fsws-logo.png"}
+        src={logo}
+        fallbackSrc={"/assets/fsws-logo.png"}
         alt={"FSWS logo"}
         boxSize={8}
       />

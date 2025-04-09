@@ -26,6 +26,10 @@ export const Navbar = () => {
   const isMobile = useBreakpointValue({ base: true, md: false });
   const { isOpen, onOpen, onClose } = useDisclosure();
   const borderColor = useColorModeValue("brand.200", "brand.700");
+  const logo = useColorModeValue(
+    "/assets/FSWS-green.png",
+    "/assets/FSWS-green-lite.png"
+  );
 
   const preventRightClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -56,9 +60,12 @@ export const Navbar = () => {
           borderColor={borderColor}
         >
           <Image
-            src={"/assets/fsws-logo.png"}
+            src={logo}
+            alt={"FSWS logo"}
+            fallbackSrc={"/assets/fsws-logo.png"}
             boxSize={16}
             onContextMenu={preventRightClick}
+            p={2}
           />
           {isMobile ? (
             <Flex align={"center"}>
@@ -158,6 +165,11 @@ const BottomSheet = ({
   const hoverColor = useColorModeValue("brand.50", "brand.600");
   const textColor = useColorModeValue("brand.800", "brand.50");
 
+  const logo = useColorModeValue(
+    "/assets/FSWS-green.png",
+    "/assets/FSWS-green-lite.png"
+  );
+
   return (
     <Drawer
       isOpen={isOpen}
@@ -169,7 +181,7 @@ const BottomSheet = ({
       <DrawerContent bg={useColorModeValue("brand.50", "brand.950")} py={4}>
         <DrawerHeader>
           <Stack direction={"row"} justify={"space-between"} align={"center"}>
-            <Image src={"/assets/fsws-logo.png"} boxSize={16} />
+            <Image src={logo} boxSize={16} fallbackSrc={"/assets/fsws-logo.png"} p={2} />
             <IconButton
               aria-label="Close menu"
               icon={<FaTimes />}
