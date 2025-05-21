@@ -114,6 +114,8 @@ export interface ContactMethod {
 
 export interface Footer {
   copyright: string;
+  GSTIN?: string;
+  MSME?: string;
 }
 
 export interface WebsiteContent {
@@ -121,6 +123,7 @@ export interface WebsiteContent {
   clientsSection: ClientsSection;
   aboutSection: AboutSection;
   heroSection: HeroSection;
+  fertilizerSection: ProductSection;
   productSection: ProductSection;
   servicesSection: ServicesSection;
   impactSection: ImpactSection;

@@ -22,7 +22,7 @@ export default function ImpactSection({ id }: { id: string }) {
       </Heading>
 
       {/* Statistics grid */}
-      <SimpleGrid columns={{ base: 1, md: 3 }} spacing={1}>
+      <SimpleGrid columns={{ base: 1, md: 2, xl: 4 }} spacing={1}>
         {impactSection.statistics.map((statItem, index) => (
           <SingleStat
             key={index}
@@ -84,9 +84,7 @@ const SingleStat = ({
       <Heading as="h3" size="xl" color={headingColor}>
         {displayStat}
       </Heading>
-      <Text fontSize="lg">
-        {description}
-      </Text>
+      <Text fontSize="lg">{description}</Text>
     </VStack>
   );
 };

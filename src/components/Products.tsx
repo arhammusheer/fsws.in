@@ -6,11 +6,15 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { content } from "../content/content";
-import { ProductCard } from "../content/types";
+import { ProductSection as IProductSection, ProductCard } from "../content/types";
 
-export default function ProductSection({ id }: { id: string }) {
-  const productSection = content.productSection;
+export default function ProductSection({
+  id,
+  productSection,
+}: {
+  id: string;
+  productSection: IProductSection;
+}) {
   const headingColor = useColorModeValue("brand.600", "brand.100");
 
   return (
@@ -81,8 +85,8 @@ const SingleProduct = ({ title, description, images, pills }: ProductCard) => {
               bgPosition="center"
               bgRepeat="no-repeat"
               borderRadius={"md"}
-							borderWidth={1}
-							borderColor={border}
+              borderWidth={1}
+              borderColor={border}
             />
           ))}
         </Stack>

@@ -58,9 +58,35 @@ export const content: WebsiteContent = {
     description:
       "First Source Waste Solutions is a leading provider of waste management services. We help businesses reduce waste, recycle efficiently, and achieve their sustainability goals. Our team of experts works closely with clients to develop customized waste management solutions that are cost-effective and environmentally friendly.",
   },
+  fertilizerSection: {
+    id: "green-products",
+    title: "Our Green Products",
+    description:
+      "Our range of eco-conscious products is crafted from responsibly processed organic waste, transforming everyday horticultural and agricultural by-products into high-value resources. From TerraVita — a nutrient-rich compost that revitalizes soil and supports robust plant growth — to our fortified cattle feed that promotes livestock health and productivity, each solution reflects our commitment to circular economy practices.",
+    cards: [
+      {
+        title: "TerraVita",
+        description:
+          "A premium organic compost made from horticulture waste, green waste, dry leaves, cow dung and canteen waste. Made from a proprietary bacterial culture, it is rich in nutrients and beneficial microorganisms, promoting healthy plant growth and soil health.",
+        images: [
+          "/assets/compost/terravita-1.jpg",
+          "/assets/compost/compost-site.jpg",
+        ],
+      },
+      {
+        title: "Cattle Feed",
+        description:
+          "A nutritious cattle feed made from a blend of organic materials. It is designed to provide essential nutrients for livestock, promoting health and productivity.",
+        images: [
+          "/assets/compost/cattle-feed-pellet.jpeg",
+          "/assets/compost/pellet-machine.jpg",
+        ],
+      },
+    ],
+  },
   productSection: {
-    id: "products",
-    title: "Our Products",
+    id: "ash-products",
+    title: "Our Ash Products",
     description:
       "Innovative, eco-friendly products that transform waste into valuable resources.",
 
@@ -141,6 +167,11 @@ export const content: WebsiteContent = {
     title: "We make change happen.",
     statistics: [
       {
+        stat: "100% Eco-Friendly",
+        description: "Products made from recycled or organic materials",
+        isRollingNumber: false,
+      },
+      {
         stat: "4000+ Bricks",
         description: "Production Per Day",
         isRollingNumber: true,
@@ -202,6 +233,26 @@ export const content: WebsiteContent = {
         answer:
           "Yes, we ensure that all our waste management practices comply with local, state, and federal regulations, so you can be confident in staying fully compliant while reducing environmental impact.",
       },
+      {
+        question: "What are TerraVita and your cattle feed made from?",
+        answer:
+          "TerraVita compost is made from horticulture waste, dry leaves, cow dung, and canteen waste using a proprietary bacterial culture. Our cattle feed is formulated from organic byproducts to provide balanced nutrition for livestock.",
+      },
+      {
+        question: "Are your green products certified or tested?",
+        answer:
+          "Yes, our green products undergo quality checks for safety, efficacy, and environmental compliance. TerraVita meets compost quality benchmarks, and our cattle feed is lab-tested for nutritional value.",
+      },
+      {
+        question: "How do your products support sustainable agriculture?",
+        answer:
+          "Our compost enriches soil health naturally without chemical inputs, while the cattle feed supports livestock productivity using upcycled organic ingredients — reducing dependence on conventional farming inputs.",
+      },
+      {
+        question: "Can I request bulk quantities of compost or feed?",
+        answer:
+          "Absolutely. We cater to both retail and bulk orders. Contact us for customized packaging, recurring delivery options, and bulk pricing.",
+      },
     ],
   },
   contactSection: {
@@ -247,5 +298,7 @@ export const content: WebsiteContent = {
   },
   footer: {
     copyright: `© ${new Date().getFullYear()} First Source Waste Solutions. All Rights Reserved.`,
+    GSTIN: "05AADCF8128L1ZG",
+    MSME: "UDYAM-UK-06-0004657",
   },
 };

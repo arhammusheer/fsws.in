@@ -20,6 +20,12 @@ export const Footer = () => {
       >
         <BrandedDivider />
         <Text>{content.footer.copyright}</Text>
+        {content.footer.GSTIN || content.footer.MSME ? (
+          <Text fontSize={"xs"} color={"gray.500"}>
+            {content.footer.GSTIN && `GSTIN: ${content.footer.GSTIN}`}
+            {content.footer.MSME && ` | MSME: ${content.footer.MSME}`}
+          </Text>
+        ) : null}
       </Stack>
     </Container>
   );
