@@ -31,6 +31,11 @@ export const content: WebsiteContent = {
     title: "Our Clients",
     clients: [
       {
+        name: "Bharat Heavy Electricals Limited",
+        image:"/assets/clients/BHEL-light.png",
+        darkImage: "/assets/clients/BHEL-dark.png",
+      },
+      {
         name: "ITC Limited",
         image: "/assets/clients/ITC-light.png",
         darkImage: "/assets/clients/ITC-dark.png",
