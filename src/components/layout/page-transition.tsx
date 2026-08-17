@@ -87,8 +87,13 @@ const SOFT_ID = "fsws-transition-soft";
  * four screen edges as well and let the page show through around the border.
  * Blurring only the mask means the moving edge is the sole soft thing on
  * screen, and the fill stays flat green everywhere behind it.
+ *
+ * Raising this costs nothing to get right elsewhere: `reach()` already adds
+ * three standard deviations to the radius, so the circle still arrives fully
+ * opaque at the far corner however soft the edge gets. It does cost fill rate,
+ * which is why this only runs on the viewports ALLOW admits.
  */
-const SOFT_EDGE = 30;
+const SOFT_EDGE = 120;
 
 /**
  * The mark, at the middle of the screen rather than at the origin.
