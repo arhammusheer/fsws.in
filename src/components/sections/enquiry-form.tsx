@@ -3,16 +3,15 @@
 import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import { Panel } from "@/components/ui/panel";
 import { contact } from "@/content/site";
 
 type Status = "idle" | "sending" | "sent" | "error";
 
 /* Flat, like every other non-button surface. */
-const field =
-  "w-full rounded-lg border border-ink-200 bg-white px-4 py-3 text-ink-900 outline-none transition-colors focus:border-green-600";
-const labelCls =
-  "block text-[0.7rem] font-bold tracking-[0.16em] text-green-600 uppercase";
 
 export function EnquiryForm() {
   const [status, setStatus] = useState<Status>("idle");
@@ -60,37 +59,40 @@ export function EnquiryForm() {
       {/* honeypot, positioned off-screen rather than display:none, which some
           bots skip */}
       <div className="absolute left-[-9999px]" aria-hidden="true">
+        {/* Deliberately plain elements, not Input and Label. This field exists
+            to be filled in by something that is not a person, and dressing it
+            like the real ones only helps it be recognised. */}
         <label htmlFor="website">Website</label>
         <input id="website" name="website" tabIndex={-1} autoComplete="off" />
       </div>
 
       <div className="grid gap-6 sm:grid-cols-2">
         <div>
-          <label htmlFor="name" className={labelCls}>Name</label>
-          <input id="name" name="name" required className={`${field} mt-2`} />
+          <Label htmlFor="name">Name</Label>
+          <Input id="name" name="name" required className="mt-2" />
         </div>
         <div>
-          <label htmlFor="organisation" className={labelCls}>Organisation</label>
-          <input id="organisation" name="organisation" className={`${field} mt-2`} />
+          <Label htmlFor="organisation">Organisation</Label>
+          <Input id="organisation" name="organisation" className="mt-2" />
         </div>
       </div>
 
       <div className="grid gap-6 sm:grid-cols-2">
         <div>
-          <label htmlFor="email" className={labelCls}>Email</label>
-          <input id="email" name="email" type="email" required className={`${field} mt-2`} />
+          <Label htmlFor="email">Email</Label>
+          <Input id="email" name="email" type="email" required className="mt-2" />
         </div>
         <div>
-          <label htmlFor="phone" className={labelCls}>Phone</label>
-          <input id="phone" name="phone" type="tel" className={`${field} mt-2`} />
+          <Label htmlFor="phone">Phone</Label>
+          <Input id="phone" name="phone" type="tel" className="mt-2" />
         </div>
       </div>
 
       <div>
-        <label htmlFor="message" className={labelCls}>
+        <Label htmlFor="message">
           The site, the streams and rough volumes
-        </label>
-        <textarea id="message" name="message" rows={6} required className={`${field} mt-2 resize-y`} />
+        </Label>
+        <Textarea id="message" name="message" rows={6} required className="mt-2 resize-y" />
       </div>
 
       {error ? (
