@@ -1,0 +1,187 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+/* Keeps the `dark:` variant class-driven rather than media-driven. The site is
+   light only, so without this the shadcn dark palette would switch itself on
+   for anyone whose OS is set to dark. We never add the .dark class. */
+@custom-variant dark (&:is(.dark *));
+
+/* ============================================================
+   FSWS design system
+
+   Palette and type from brand.fsws.in. Structure follows the group
+   system used on vayasyaseva.com: numeric colour ramps rather than
+   flat tokens, a derived radius scale, and one responsive spacing
+   ladder applied through the Section primitive.
+
+   Two deliberate departures, both agreed:
+
+   1. The brand sheet says no rounded surfaces. Everything here is
+      rounded, on a derived scale, because unrelieved square corners
+      read as unfinished at screen sizes.
+   2. Physicality comes from a darker "lip" beneath interactive
+      surfaces which compresses on press. That is a bevel in the
+      strict sense, so it bends the brand's no-bevels line. It does
+      not bend the two rules that actually matter for this brand:
+      NO SHADOWS ANYWHERE, and no gradients. Both are absent, and the
+      lint check in scripts/check-design.mjs enforces it.
+   ============================================================ */
+
+@theme {
+  /* ---- green ramp -------------------------------------------------
+     Anchored on the two brand greens: 600 is FSWS Green #175C25 and
+     900 is Pine Deep #0C2E12. 200 is Mist #C5D6C8. The rest are
+     interpolated so lips, hovers and tints all come from one family
+     instead of being invented per component.
+     ------------------------------------------------------------------ */
+  --color-green-50: #f2f7f3;
+  --color-green-100: #e1ede4;
+  --color-green-200: #c5d6c8;
+  --color-green-300: #9bbba3;
+  --color-green-400: #5e8f6b;
+  --color-green-500: #2e7440;
+  --color-green-600: #175c25;
+  --color-green-700: #12491e;
+  --color-green-800: #0f3a18;
+  --color-green-900: #0c2e12;
+  --color-green-950: #08240e;
+
+  /* ---- neutrals --------------------------------------------------- */
+  --color-ink-50: #f7f8f7;
+  --color-ink-100: #eef0ee;
+  --color-ink-200: #dde5de;
+  --color-ink-400: #94a3b8;
+  --color-ink-600: #334155;
+  --color-ink-900: #111827;
+
+  /* ---- type ------------------------------------------------------- */
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+  --font-heading: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+
+  /* ---- radius -----------------------------------------------------
+     Derived from one base so nested corners stay optically correct:
+     an inner corner should be the outer radius less its inset.
+     ------------------------------------------------------------------ */
+  --radius-xs: calc(var(--radius) - 6px);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 14px);
+}
+
+/* shadcn semantic tokens, mapped onto the brand ramps so any Radix
+   component picked up later is on-brand rather than neutral grey. */
+:root {
+  --radius: 0.625rem;
+
+  --background: #ffffff;
+  --foreground: var(--color-ink-900);
+  --card: #ffffff;
+  --card-foreground: var(--color-ink-900);
+  --popover: #ffffff;
+  --popover-foreground: var(--color-ink-900);
+  --primary: var(--color-green-600);
+  --primary-foreground: #ffffff;
+  --secondary: var(--color-green-50);
+  --secondary-foreground: var(--color-green-900);
+  --muted: var(--color-green-50);
+  --muted-foreground: var(--color-ink-600);
+  --accent: var(--color-green-50);
+  --accent-foreground: var(--color-green-900);
+  --destructive: #b42318;
+  --border: var(--color-ink-200);
+  --input: var(--color-ink-200);
+  --ring: var(--color-green-600);
+}
+
+/* Registers those as Tailwind utilities. Fonts are deliberately absent:
+   shadcn's generated block declares `--font-sans: var(--font-sans)`,
+   which is self-referential and resolves to nothing. Ours are set in
+   the @theme block above. */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    @apply font-sans;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  ::selection {
+    background: var(--color-green-600);
+    color: #ffffff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-green-600);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+  }
+
+  /* Dark grounds re-point the ink roles so anything nested inverts
+     cleanly. Set on the section itself and read only through var():
+     scoping these as loose descendant selectors is what produced
+     white-on-white bugs in the earlier build. */
+  [data-ground="deep"] {
+    --ink: #ffffff;
+    --ink-strong: #ffffff;
+    --ink-soft: var(--color-green-200);
+    --label: var(--color-green-200);
+    --hairline: var(--color-green-800);
+  }
+
+  [data-ground="light"],
+  [data-ground="tint"] {
+    --ink: var(--color-ink-900);
+    --ink-strong: var(--color-green-900);
+    --ink-soft: var(--color-ink-600);
+    --label: var(--color-green-600);
+    --hairline: var(--color-ink-200);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
