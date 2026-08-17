@@ -4,7 +4,7 @@ import { PageHero } from "@/components/layout/page-hero";
 import { EnquiryForm } from "@/components/sections/enquiry-form";
 import { Container, Label, Section } from "@/components/layout/section";
 import { Panel } from "@/components/ui/panel";
-import { contact, site } from "@/content/site";
+import { contact } from "@/content/site";
 import { consent, registrations } from "@/content/credentials";
 
 export const metadata: Metadata = {
@@ -21,14 +21,9 @@ export default function ContactPage() {
         eyebrow="Contact"
         title="Tell us the site, the streams and the volumes"
         lede="We will come back with a collection schedule, the route each stream would take, and the certificate you would receive for each one."
-        meta={[
-          { label: "Email", value: contact.email },
-          { label: "Phone", value: contact.phone },
-          { label: "Region", value: `${site.locality}, ${site.region}` },
-        ]}
       />
 
-      <Section ground="light">
+      <Section ground="tint">
         <Container>
           <div className="grid gap-12 lg:grid-cols-[1fr_19rem] lg:gap-16">
             <div className="relative">

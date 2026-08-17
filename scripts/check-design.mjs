@@ -24,7 +24,10 @@ const EXT = /\.(tsx?|css)$/;
 
 /* The header's progressive scrim uses a linear-gradient as a MASK, to fade a
    blur out downward, not as a decorative fill. That is the one legitimate use
-   and it is confined to this file. Anywhere else, a gradient is still a bug. */
+   and it is confined to this file. Anywhere else, a gradient is still a bug.
+
+   The interior page opener was briefly on this list. It is not any more: the
+   band it was dissolving has been removed entirely. */
 const GRADIENT_ALLOWED = ["src/components/layout/header.tsx"];
 
 const RULES = [

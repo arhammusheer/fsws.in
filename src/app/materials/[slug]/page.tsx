@@ -38,20 +38,9 @@ export default async function StreamPage({ params }: PageProps<"/materials/[slug
         eyebrow={`Stream ${stream.index}`}
         title={stream.qualifier ? `${stream.name}, ${stream.qualifier}` : stream.name}
         lede={stream.summary}
-        meta={[
-          { label: "End use", value: stream.endUse },
-          {
-            label: "Processed by",
-            value: inHouse ? "FSWS, Haridwar" : stream.certifier,
-          },
-          {
-            label: "Certificate",
-            value: inHouse ? "Issued by FSWS" : "Forwarded unaltered",
-          },
-        ]}
       />
 
-      <Section ground="light">
+      <Section ground="tint">
         <Container>
           <div className="grid gap-10 lg:grid-cols-[18rem_1fr] lg:gap-16">
             <Panel tone="tint" radius="xl" className="h-fit p-6">
@@ -98,7 +87,7 @@ export default async function StreamPage({ params }: PageProps<"/materials/[slug
         </Container>
       </Section>
 
-      <Section ground="tint" className="py-12 sm:py-14 lg:py-16">
+      <Section ground="light" className="py-12 sm:py-14 lg:py-16">
         <Container>
           <div className="flex flex-wrap items-center justify-between gap-4">
             <Label>Other streams</Label>

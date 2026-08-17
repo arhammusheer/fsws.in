@@ -24,7 +24,7 @@ export const contact = {
   phoneHref: "tel:+919068855443",
   altPhone: "+91 74095 16090",
   altPhoneHref: "tel:+917409516090",
-  address: "Khasra 767 to 769, Salempur Mehdood, Haridwar, Uttarakhand",
+  address: "SIDCUL, Haridwar, Uttarakhand",
 } as const;
 
 export const nav = [

@@ -26,14 +26,9 @@ export default function ServicesPage() {
         eyebrow="Services"
         title="What we take on, and what you get back"
         lede="The collection is the easy part. The value is in what arrives afterwards: weights you can publish and certificates that name the party who did the work."
-        meta={[
-          { label: "Services", value: String(services.length) },
-          { label: "Certificates", value: "One per consignment" },
-          { label: "Records", value: "Retained per consignment" },
-        ]}
       />
 
-      <Section ground="light">
+      <Section ground="tint">
         <Container>
           <ul className="grid gap-5 md:grid-cols-2">
             {services.map((service) => (
@@ -63,6 +58,7 @@ export default function ServicesPage() {
 
       <FaqSection
         items={faqs}
+        ground="light"
         lede="The full set. Every answer here is one we can produce a document for."
       />
 

@@ -62,7 +62,7 @@ function organizationJsonLd() {
     telephone: contact.phone,
     address: {
       "@type": "PostalAddress",
-      streetAddress: "Khasra 767 to 769, Salempur Mehdood",
+      streetAddress: "SIDCUL",
       addressLocality: site.locality,
       addressRegion: site.region,
       addressCountry: site.country,

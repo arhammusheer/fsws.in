@@ -21,10 +21,12 @@
    sizes.
 
    Otherwise the brand's surface rules hold exactly. NO SHADOWS
-   ANYWHERE, no gradients, no bevels. Buttons briefly carried a
-   pressed-key lip, which was a bevel in the strict sense; it has been
-   removed and the rule now applies with no exceptions. All three are
-   enforced by scripts/check-design.mjs.
+   ANYWHERE, no gradients, no bevels. The single gradient in the
+   codebase is in the header, where it acts as a mask on a blur rather
+   than as a fill, and it is named in the allow list in
+   scripts/check-design.mjs. Buttons briefly carried a pressed-key lip,
+   which was a bevel in the strict sense; it has been removed and the
+   rule now applies with no exceptions.
    ============================================================ */
 
 @theme {

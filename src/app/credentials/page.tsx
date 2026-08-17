@@ -24,14 +24,9 @@ export default function CredentialsPage() {
         eyebrow="Credentials"
         title="What we are licensed to do, and what we are not"
         lede="Everything below is transcribed from a document that can be produced on request. Where an activity requires a licence FSWS does not hold, that is stated rather than left to be discovered."
-        meta={[
-          { label: "UKPCB CAF", value: consent.cafId },
-          { label: "Application", value: consent.applicationNo },
-          { label: "Valid to", value: consent.validTo },
-        ]}
       />
 
-      <Section ground="light">
+      <Section ground="tint">
         <Container>
           <div className="grid gap-10 lg:grid-cols-[18rem_1fr] lg:gap-16">
             <SectionHeader eyebrow="Consent to operate" title={consent.instrument} as="h2" />
@@ -64,7 +59,7 @@ export default function CredentialsPage() {
         </Container>
       </Section>
 
-      <Section ground="tint">
+      <Section ground="light">
         <Container>
           <SectionHeader
             eyebrow="Consented capacity"
@@ -83,7 +78,7 @@ export default function CredentialsPage() {
         </Container>
       </Section>
 
-      <Section ground="light">
+      <Section ground="tint">
         <Container>
           <div className="grid gap-10 lg:grid-cols-[18rem_1fr] lg:gap-16">
             <div>
@@ -105,7 +100,7 @@ export default function CredentialsPage() {
         </Container>
       </Section>
 
-      <Section ground="tint">
+      <Section ground="light">
         <Container>
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
             <div>

@@ -27,7 +27,7 @@ export const registrations = validate(
     { label: "Udyam registration", value: "UDYAM-UK-06-0004657" },
     {
       label: "Facility",
-      value: "Khasra 767 to 769, Salempur Mehdood, Haridwar, Uttarakhand",
+      value: "SIDCUL, Haridwar, Uttarakhand",
     },
   ],
   "content/credentials.ts:registrations",

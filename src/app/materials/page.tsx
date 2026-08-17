@@ -8,7 +8,6 @@ import { Container, Section, SectionHeader } from "@/components/layout/section";
 import { Button } from "@/components/ui/button";
 import { Panel } from "@/components/ui/panel";
 import { streams } from "@/content/streams";
-import { consent } from "@/content/credentials";
 
 export const metadata: Metadata = {
   title: "Materials",
@@ -24,20 +23,15 @@ export default function MaterialsPage() {
         eyebrow="Materials"
         title="Eight streams, and a named destination for each"
         lede="Where the work happens at Haridwar under our own consent, we issue the certificate. Where a mill or a registered recycler performs the recovery, they issue it and we forward it unaltered."
-        meta={[
-          { label: "Streams", value: String(streams.length) },
-          { label: "Routes reported", value: "Reused, recycled, recovered, disposed" },
-          { label: "Consent", value: `UKPCB CAF ${consent.cafId}` },
-        ]}
       />
 
-      <Section ground="light">
+      <Section ground="tint">
         <Container>
           <RoutingMap streams={streams} />
         </Container>
       </Section>
 
-      <Section ground="tint">
+      <Section ground="light">
         <Container>
           <SectionHeader eyebrow="In detail" title="What happens to each stream" />
           <ul className="mt-12 grid gap-5 md:grid-cols-2 lg:mt-16 lg:grid-cols-3">
