@@ -41,7 +41,41 @@ export const metadata: Metadata = {
     title: `${site.name} | Waste management, evidenced`,
     description: site.description,
   },
-  robots: { index: true, follow: true },
+  // Every route sets its own openGraph through lib/seo.ts. This block is the
+  // homepage's card and the fallback for anything that does not.
+  twitter: {
+    card: "summary_large_image",
+    title: `${site.name} | Waste management, evidenced`,
+    description: site.description,
+  },
+  keywords: [
+    "waste management Haridwar",
+    "industrial waste Uttarakhand",
+    "end-use certificate",
+    "UKPCB consent",
+    "waste segregation SIDCUL",
+    "fly ash bricks",
+    "compost Haridwar",
+  ],
+  authors: [{ name: site.legalName, url: site.url }],
+  creator: site.legalName,
+  publisher: site.legalName,
+  category: "Waste management",
+  // Stops iOS Safari turning the registration numbers into phone links, which
+  // it does to any long digit string and which makes CIN and GSTIN tappable
+  // nonsense.
+  formatDetection: { telephone: false, address: false, email: false },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   alternates: { canonical: "/" },
   // The icon files themselves live in this directory and Next emits the link
   // tags for them from its file conventions. Only the manifest has to be

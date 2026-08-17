@@ -7,6 +7,7 @@ import { Container, Label, Section } from "@/components/layout/section";
 import { Button } from "@/components/ui/button";
 import { Panel } from "@/components/ui/panel";
 import { streamBySlug, streams } from "@/content/streams";
+import { pageMetadata } from "@/lib/seo";
 
 export function generateStaticParams() {
   return streams.map((s) => ({ slug: s.slug }));
@@ -19,11 +20,11 @@ export async function generateMetadata({
   const stream = streamBySlug(slug);
   if (!stream) return {};
   const name = stream.qualifier ? `${stream.name}, ${stream.qualifier}` : stream.name;
-  return {
+  return pageMetadata({
     title: name,
     description: stream.summary,
-    alternates: { canonical: `/materials/${stream.slug}` },
-  };
+    path: `/materials/${stream.slug}`,
+  });
 }
 
 export default async function StreamPage({ params }: PageProps<"/materials/[slug]">) {

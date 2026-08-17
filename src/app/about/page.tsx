@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 
+import { pageMetadata } from "@/lib/seo";
+
 import { PageHero } from "@/components/layout/page-hero";
 import { Container, Section, SectionHeader } from "@/components/layout/section";
 import { Panel } from "@/components/ui/panel";
@@ -8,12 +10,12 @@ import { clients } from "@/content/services";
 import { consent } from "@/content/credentials";
 import { contact, site } from "@/content/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "About",
   description:
     "FirstSources Waste Solutions operates a consented waste processing facility at Haridwar, Uttarakhand, with composting, plastic processing and ash based manufacture on site.",
-  alternates: { canonical: "/about" },
-};
+  path: "/about",
+});
 
 const plant = [
   { t: "Shredders and sieving", d: "Size reduction and grading ahead of both the block line and onward dispatch." },

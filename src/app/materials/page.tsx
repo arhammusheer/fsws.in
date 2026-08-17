@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { ArrowRightIcon } from "lucide-react";
 
@@ -9,12 +11,12 @@ import { Button } from "@/components/ui/button";
 import { Panel } from "@/components/ui/panel";
 import { streams } from "@/content/streams";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Materials",
   description:
     "The material streams FSWS collects, how each is processed, where it ends up, and which party issues the end-use certificate.",
-  alternates: { canonical: "/materials" },
-};
+  path: "/materials",
+});
 
 export default function MaterialsPage() {
   return (

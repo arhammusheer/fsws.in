@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 
 import { PageHero } from "@/components/layout/page-hero";
@@ -8,12 +10,12 @@ import { Panel } from "@/components/ui/panel";
 import { ProductFeature } from "@/components/sections/product-feature";
 import { productLines, products, productsIn } from "@/content/products";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Products",
   description:
     "EcoBricks, TerraPots, TerraVita compost and cattle feed. What the collected material becomes, off the ash line and the green line.",
-  alternates: { canonical: "/products" },
-};
+  path: "/products",
+});
 
 /**
  * Chapter rule. The line name sits on a green hairline with the sentence that

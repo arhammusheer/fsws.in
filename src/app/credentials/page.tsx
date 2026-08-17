@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 
 import { PageHero } from "@/components/layout/page-hero";
@@ -10,12 +12,12 @@ import {
 } from "@/content/credentials";
 import { contact } from "@/content/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Credentials",
   description:
     "Registration, consent and records for FirstSources Waste Solutions. Consolidated Consent to Operate from the Uttarakhand Pollution Control Board, valid to 31 March 2030.",
-  alternates: { canonical: "/credentials" },
-};
+  path: "/credentials",
+});
 
 export default function CredentialsPage() {
   return (

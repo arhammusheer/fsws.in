@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 
+import { pageMetadata } from "@/lib/seo";
+
 import { PageHero } from "@/components/layout/page-hero";
 import { EnquiryForm } from "@/components/sections/enquiry-form";
 import { Container, Label, Section } from "@/components/layout/section";
@@ -7,12 +9,12 @@ import { Panel } from "@/components/ui/panel";
 import { contact } from "@/content/site";
 import { consent, registrations } from "@/content/credentials";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Contact",
   description:
     "Tell us the site, the streams and the volumes. We will come back with the route each stream would take and the certificate you would receive.",
-  alternates: { canonical: "/contact" },
-};
+  path: "/contact",
+});
 
 export default function ContactPage() {
   return (

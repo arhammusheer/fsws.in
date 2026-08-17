@@ -10,7 +10,8 @@
     "shot": "node scripts/shot.mjs",
     "check:design": "node scripts/check-design.mjs",
     "check": "npm run check:design && npm run lint && tsc --noEmit",
-    "icons": "node scripts/make-icons.mjs"
+    "icons": "node scripts/make-icons.mjs",
+    "og": "node scripts/make-og.mjs"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",
