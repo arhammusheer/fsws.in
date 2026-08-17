@@ -47,11 +47,28 @@ import { usePathname, useRouter } from "next/navigation";
  * The mark sits at the middle of the screen throughout, wearing the same mask,
  * so it belongs to the green and to nothing else.
  *
- * Anyone who has asked for reduced motion is not intercepted at all: links
- * navigate the ordinary way and none of this runs. That is checked live rather
- * than once at mount, because the CSS reduced-motion block cannot switch this
- * off. See `sync` below.
+ * Phones, and anyone who has asked for reduced motion, are not intercepted at
+ * all: links navigate the ordinary way and none of this runs. Both conditions
+ * are one media query, checked live rather than once at mount, because the CSS
+ * reduced-motion block cannot switch this off. See ALLOW and `sync` below.
  */
+
+/**
+ * The transition runs on pointer-driven, full-size viewports only.
+ *
+ * Phones are excluded outright. The expensive part of this is a full screen
+ * SVG mask carrying a 30px Gaussian blur, animated for half a second; a laptop
+ * composites that without noticing and a phone does not, so what should feel
+ * immediate arrives as a lurch, and it is in front of the reader while the page
+ * they asked for is already waiting behind it. A navigation that feels slow is
+ * worse than no transition at all.
+ *
+ * Reduced motion is the second half of the same query. `no-preference` matching
+ * is the condition to run, rather than `reduce` matching being the condition to
+ * stop, so anything that cannot answer the question falls through to no
+ * animation. That is the correct direction to fail in.
+ */
+const ALLOW = "(min-width: 768px) and (prefers-reduced-motion: no-preference)";
 
 const OUT_MS = 520;
 const CLEAR_MS = 600;
@@ -182,7 +199,7 @@ export function PageTransition({ children }: { children: ReactNode }) {
   const from = useRef(pathname);
 
   useEffect(() => {
-    const query = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const query = window.matchMedia(ALLOW);
 
     const release = () => {
       if (stuck.current) clearTimeout(stuck.current);
@@ -280,7 +297,7 @@ export function PageTransition({ children }: { children: ReactNode }) {
      */
     const sync = () => {
       document.removeEventListener("click", onClick, true);
-      if (query.matches) {
+      if (!query.matches) {
         // Abort anything mid-flight rather than leaving green on the screen.
         release();
         return;
@@ -313,7 +330,7 @@ export function PageTransition({ children }: { children: ReactNode }) {
     // Belt and braces: reaching "held" already requires the click handler, and
     // that is detached under reduced motion. If the setting was switched on
     // between the two halves, take the green away rather than animate it.
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    if (!window.matchMedia(ALLOW).matches) {
       overlay.style.visibility = "hidden";
       hole.getAnimations().forEach((a) => a.cancel());
       hole.setAttribute("r", "0");

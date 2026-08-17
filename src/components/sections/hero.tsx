@@ -22,11 +22,20 @@ export function Hero() {
     <Section
       ground="deep"
       flush
-      /* flex-1 so the hero absorbs whatever height the first-screen wrapper in
-         page.tsx has left after the strip. The top padding clears the fixed
-         header; the rest is a floor for viewports short enough that content,
-         not the viewport, sets the height. */
-      className="flex flex-1 items-center pt-24 pb-14 sm:pt-28 sm:pb-16 lg:pt-32 lg:pb-20"
+      /* On a phone the hero takes the whole first screen on its own, so the
+         registration strip starts below the fold and is met on the first
+         scroll. Sharing the screen with it there meant five label and value
+         pairs wrapping into a block several lines deep, which ate the opening
+         view and read as a table of small print under the headline.
+
+         From sm the strip is a single line again, so the two go back to
+         sharing: min-h-0 hands height control to the wrapper in page.tsx and
+         flex-1 lets the hero absorb whatever is left after the strip.
+
+         The top padding clears the fixed header; the rest is a floor for
+         viewports short enough that content, not the viewport, sets the
+         height. */
+      className="flex min-h-[100dvh] flex-1 items-center pt-24 pb-14 sm:min-h-0 sm:pt-28 sm:pb-16 lg:pt-32 lg:pb-20"
     >
       <HeroVideo />
       <Container>
