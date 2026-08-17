@@ -10,7 +10,7 @@ type Status = "idle" | "sending" | "sent" | "error";
 
 /* Flat, like every other non-button surface. */
 const field =
-  "w-full rounded-lg border border-ink-200 bg-green-50/40 px-4 py-3 text-ink-900 outline-none transition-colors focus:border-green-600 focus:bg-white";
+  "w-full rounded-lg border border-ink-200 bg-white px-4 py-3 text-ink-900 outline-none transition-colors focus:border-green-600";
 const labelCls =
   "block text-[0.7rem] font-bold tracking-[0.16em] text-green-600 uppercase";
 

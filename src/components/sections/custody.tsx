@@ -22,6 +22,13 @@ import { cn } from "@/lib/utils";
  * filled rather than hollow, which is the whole argument of the section: the
  * chain terminates in a document.
  *
+ * Below sm the row is two columns and carries three cells, so the description
+ * wraps under the title rather than sitting beside it. The spine has to span
+ * both of those rows: left at one, auto-placement gave the description the
+ * spine's own column, which is 0.75rem wide, and every description set one word
+ * per line. Spanning also keeps the rail arithmetic correct, since each segment
+ * is measured from its own cell.
+ *
  * The rail is drawn per row rather than as one element over the list, because
  * row heights vary with the text. Each segment overhangs its row by the row
  * padding (py-5, so 1.25rem) to bridge the gap to its neighbour, and the first
@@ -87,7 +94,10 @@ export function Custody() {
                   key={step.t}
                   className="grid grid-cols-[0.75rem_1fr] gap-x-5 py-5 sm:grid-cols-[0.75rem_11rem_1fr] sm:gap-x-8"
                 >
-                  <span aria-hidden="true" className="relative block">
+                  <span
+                    aria-hidden="true"
+                    className="relative block row-span-2 sm:row-span-1"
+                  >
                     <span
                       className={cn(
                         "absolute left-1/2 w-px -translate-x-1/2 bg-green-200",

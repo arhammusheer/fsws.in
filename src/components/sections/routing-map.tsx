@@ -136,7 +136,7 @@ export function RoutingMap({ streams }: { streams: readonly Stream[] }) {
               {/* Processor and certifier are the same party by design: whoever
                   performs the recovery issues the certificate. One row, not two
                   rows repeating a value. */}
-              <dl className="mt-4 grid grid-cols-[5.5rem_1fr] gap-y-2 text-sm">
+              <dl className="mt-4 grid grid-cols-[6.75rem_1fr] gap-x-3 gap-y-2 text-sm">
                 <dt className="text-[0.7rem] font-bold tracking-[0.14em] text-green-600 uppercase">
                   End use
                 </dt>

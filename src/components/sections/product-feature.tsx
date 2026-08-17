@@ -66,7 +66,7 @@ export function ProductFeature({
           {product.specs.map((spec) => (
             <div
               key={spec.label}
-              className="grid grid-cols-[9rem_1fr] items-baseline gap-4 border-b border-ink-200 py-3"
+              className="grid grid-cols-[7rem_1fr] items-baseline gap-4 border-b border-ink-200 py-3 sm:grid-cols-[9rem_1fr]"
             >
               <dt className="text-[0.7rem] font-bold tracking-[0.14em] text-green-600 uppercase">
                 {spec.label}
