@@ -27,7 +27,9 @@ import { HEADER_SOLID, HEADER_TALL } from "@/lib/layout";
  *
  * The flip is driven by an IntersectionObserver on a sentinel at the end of the
  * first screen, not a scroll listener: no rAF throttling, no work on frames
- * where nothing changed.
+ * where nothing changed. The observer reports when the sentinel crosses the
+ * bar; which state that means is decided from its position, not from
+ * `isIntersecting`, for the reason given at the callback.
  *
  * Over the hero the bar carries a progressive scrim: a blur plus a faint tint,
  * both faded out downward by a mask so there is no hard edge where it stops.
@@ -56,13 +58,32 @@ export function Header() {
     // Flip when the sentinel crosses the underside of the bar, not the top of
     // the viewport, so the change lands exactly as the hero leaves.
     const offset = headerRef.current?.offsetHeight ?? 64;
+
+    // Settle immediately from where the sentinel actually is. The observer's
+    // first callback is asynchronous, and on a page restored to a scroll
+    // position deep down it is the only callback that will ever arrive, since
+    // the intersection state never changes from there.
+    const at = sentinel.getBoundingClientRect().top;
+    setScrolledPast((current) =>
+      current === at <= offset ? current : at <= offset,
+    );
+
     const observer = new IntersectionObserver(
-      // only write when the value actually changes, so a sentinel that jitters
-      // on a dvh recalculation cannot thrash the header between states
-      ([entry]) =>
-        setScrolledPast((current) =>
-          current === !entry.isIntersecting ? current : !entry.isIntersecting,
-        ),
+      ([entry]) => {
+        // Which SIDE the sentinel is out on, not merely that it is out.
+        // `!isIntersecting` is true both above the bar and below the fold, and
+        // those are opposite situations. Once the first screen grew taller than
+        // the viewport, the sentinel started below it, so at rest the header
+        // read "scrolled past the hero" and painted itself white over the
+        // video, then flipped transparent as the sentinel scrolled into view,
+        // then white again as it left. Comparing the sentinel's top against the
+        // underside of the bar answers the question that was actually being
+        // asked.
+        const past = entry.boundingClientRect.top <= offset;
+        // only write when the value changes, so a sentinel that jitters on a
+        // dvh recalculation cannot thrash the header between states
+        setScrolledPast((current) => (current === past ? current : past));
+      },
       { rootMargin: `-${offset}px 0px 0px 0px`, threshold: 0 },
     );
     observer.observe(sentinel);

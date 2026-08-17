@@ -29,8 +29,8 @@ export function MobileNav({ solid = true }: { solid?: boolean }) {
         <MenuIcon className="size-5" aria-hidden="true" />
       </Dialog.Trigger>
       <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 z-50 bg-green-950/40" />
-        <Dialog.Content className="fixed inset-y-0 right-0 z-50 flex w-[min(21rem,88vw)] flex-col border-l border-ink-200 bg-white p-6">
+        <Dialog.Overlay className="fixed inset-0 z-50 bg-green-950/40 duration-200 data-[state=closed]:animate-out data-[state=closed]:fade-out data-[state=open]:animate-in data-[state=open]:fade-in" />
+        <Dialog.Content className="fixed inset-y-0 right-0 z-50 flex w-[min(21rem,88vw)] flex-col border-l border-ink-200 bg-white p-6 duration-300 ease-out data-[state=closed]:animate-out data-[state=closed]:slide-out-to-right data-[state=open]:animate-in data-[state=open]:slide-in-from-right">
           <div className="flex items-center justify-between">
             <Dialog.Title className="text-[0.7rem] font-bold tracking-[0.16em] text-green-600 uppercase">
               Menu
