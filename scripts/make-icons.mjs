@@ -4,12 +4,18 @@
  *
  *   npm run icons
  *
- * The base lockup is the GREEN mark, so that is what these are: the green mark
- * on a white field. The white is not decoration, it is the reason the icon
- * works anywhere. Shipping the mark on transparency would leave it invisible
- * against a dark tab strip or a dark home screen; giving it its own ground
- * means it looks the same everywhere, and it is the same pairing the mark is
- * used in throughout the site.
+ * The base lockup is the GREEN mark, so that is what these are, and they are
+ * transparent: the mark sits on whatever is behind it.
+ *
+ * Two exceptions, both forced by the platform rather than chosen:
+ *
+ *   apple-icon   iOS composites its own rounded tile and paints black behind
+ *                any alpha it finds, so a transparent icon arrives as a green
+ *                mark on black. It is flattened onto white.
+ *   maskable     Android crops the icon to a circle or squircle of its own
+ *                choosing. The margin that makes that safe only reads as
+ *                margin if there is something filling it, so this one keeps
+ *                its ground too.
  *
  * Padding is deliberately small. The mark is already a circle inside a square
  * canvas, so it brings its own optical margin; adding more just shrinks the
@@ -26,8 +32,7 @@
  *   src/app/icon.svg          scales indefinitely; browsers that support it
  *                             prefer it over the raster
  *   src/app/icon.png          512, the generic PNG fallback
- *   src/app/apple-icon.png    180, opaque: iOS composites its own rounding and
- *                             would put black behind transparency
+ *   src/app/apple-icon.png    180, opaque on white, see above
  *   public/icon-192.png       manifest
  *   public/icon-512.png       manifest
  *   public/icon-maskable.png  manifest, with the safe-zone padding Android
@@ -44,9 +49,8 @@ const ROOT = new URL("..", import.meta.url).pathname;
 const APP = join(ROOT, "src/app");
 const PUBLIC = join(ROOT, "public");
 
-/** The ground the mark sits on. The mark brings its own colour with it, so
- *  this is the only value the generator needs; the manifest's theme colour
- *  lives in src/app/manifest.ts. */
+/** The ground used only where transparency is not an option. The manifest's
+ *  theme colour lives in src/app/manifest.ts. */
 const FIELD = "#ffffff";
 
 const MARK = readFileSync(join(PUBLIC, "brand/fsws-green.svg"), "utf8");
@@ -58,7 +62,7 @@ const MARK = readFileSync(join(PUBLIC, "brand/fsws-green.svg"), "utf8");
  * artwork twice. Wrapping it means sharp rasterises the vector once, straight
  * to the size asked for.
  */
-function plate(inset) {
+function plate(inset, field = null) {
   const box = 300;
   const size = box - inset * 2;
   const inner = MARK
@@ -74,7 +78,7 @@ function plate(inset) {
 
   return Buffer.from(
     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${box} ${box}" width="${box}" height="${box}">` +
-      `<rect width="${box}" height="${box}" fill="${FIELD}"/>` +
+      (field ? `<rect width="${box}" height="${box}" fill="${field}"/>` : "") +
       inner +
       `</svg>`,
   );
@@ -103,8 +107,38 @@ const STANDARD = plate(10);
 const forSize = (size) => (size in CROP ? plate(CROP[size]) : STANDARD);
 
 /** Android masks icons to a circle or squircle and can crop up to 20% a side.
- *  56/300 keeps the badge inside the guaranteed safe zone. */
-const MASKABLE = plate(56);
+ *  56/300 keeps the badge inside the guaranteed safe zone, and this is the one
+ *  icon that has to carry a ground for that margin to read. */
+const MASKABLE = plate(56, FIELD);
+
+/**
+ * Make the SVG icon answer to the browser's colour scheme.
+ *
+ * Transparency is what was asked for, and it has a cost: the mark is dark
+ * green, so on a dark tab strip it nearly disappears. A raster icon can do
+ * nothing about that, but an SVG is a document and can carry a media query, so
+ * this one turns the mark white when the browser is in dark mode and keeps it
+ * green otherwise. Chrome, Firefox and Safari all prefer the SVG icon when one
+ * is offered, so this is what most people will actually see; the .ico stays
+ * green for the browsers that fall back to it.
+ *
+ * `!important` is required rather than sloppy: the source sets its colour in a
+ * `style` attribute, which is an inline style, and nothing but `!important`
+ * outranks one.
+ */
+const darkAware = (svg) =>
+  Buffer.from(
+    svg
+      .toString()
+      // after the wrapper's own opening tag, which is the one element every
+      // plate has whether or not it carries a ground
+      .replace(
+        /^(<svg[^>]*>)/,
+        `$1<style>@media (prefers-color-scheme: dark) {` +
+          `path, circle, ellipse, polygon { fill: #ffffff !important; }` +
+          `}</style>`,
+      ),
+  );
 
 const png = (svg, size) =>
   sharp(svg, { density: 384 }).resize(size, size).png({ compressionLevel: 9 }).toBuffer();
@@ -151,15 +185,17 @@ async function main() {
   write(join(APP, "favicon.ico"), ico(images));
 
   // The vector favicon: same construction, written out as SVG so it stays
-  // sharp at any density and costs a fraction of the PNG.
-  write(join(APP, "icon.svg"), STANDARD);
+  // sharp at any density and costs a fraction of the PNG, plus the one thing a
+  // vector icon can do that a raster cannot.
+  write(join(APP, "icon.svg"), darkAware(STANDARD));
 
   write(join(APP, "icon.png"), await png(STANDARD, 512));
   write(
     join(APP, "apple-icon.png"),
     await sharp(STANDARD, { density: 384 })
       .resize(180, 180)
-      .flatten({ background: FIELD }) // iOS puts black behind any alpha
+      // iOS paints black behind any alpha, so this one cannot be transparent
+      .flatten({ background: FIELD })
       .png({ compressionLevel: 9 })
       .toBuffer(),
   );
