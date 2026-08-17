@@ -96,7 +96,19 @@ export async function POST(request: Request) {
 
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
-    console.info(`[enquiry] no RESEND_API_KEY set, logging instead:\n${body}`);
+    // Say WHICH failure it is. "Not set" covers three different mistakes and
+    // they have different fixes: the variable was never added to the
+    // environment this deployment runs in, it was added but this deployment
+    // predates it and still carries the old snapshot, or it was saved empty.
+    // VERCEL_ENV names the environment actually executing, which is what
+    // catches a key scoped to Preview while Production is the one being read.
+    const declared = "RESEND_API_KEY" in process.env;
+    console.info(
+      `[enquiry] RESEND_API_KEY ${declared ? "declared but empty" : "not present"}` +
+        ` in env=${process.env.VERCEL_ENV ?? "local"}` +
+        ` deployment=${process.env.VERCEL_DEPLOYMENT_ID ?? "n/a"}` +
+        `. Logging the enquiry instead:\n${body}`,
+    );
     return NextResponse.json({ ok: true });
   }
 
