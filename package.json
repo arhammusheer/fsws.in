@@ -9,7 +9,8 @@
     "lint": "eslint",
     "shot": "node scripts/shot.mjs",
     "check:design": "node scripts/check-design.mjs",
-    "check": "npm run check:design && npm run lint && tsc --noEmit"
+    "check": "npm run check:design && npm run lint && tsc --noEmit",
+    "icons": "node scripts/make-icons.mjs"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",
@@ -31,6 +32,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.3.1",
+    "sharp": "^0.35.3",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

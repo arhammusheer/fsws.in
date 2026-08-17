@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Manrope, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -43,6 +43,21 @@ export const metadata: Metadata = {
   },
   robots: { index: true, follow: true },
   alternates: { canonical: "/" },
+  // The icon files themselves live in this directory and Next emits the link
+  // tags for them from its file conventions. Only the manifest has to be
+  // pointed at, since its route is generated rather than a file.
+  manifest: "/manifest.webmanifest",
+  applicationName: site.name,
+  appleWebApp: { capable: true, title: site.shortName, statusBarStyle: "default" },
+};
+
+/**
+ * theme-color drives the browser chrome around the page: the address bar on
+ * Android, the title bar of an installed window. FSWS Green, matching the
+ * manifest, so the frame belongs to the site rather than sitting outside it.
+ */
+export const viewport: Viewport = {
+  themeColor: "#175c25",
 };
 
 /** JSON-LD carrying the real registration numbers, so the entity is
