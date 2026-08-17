@@ -42,6 +42,11 @@ export default function ProductsPage() {
         eyebrow="Products"
         title="What the material becomes"
         lede="Two streams do not leave Haridwar as waste at all. Ash is pressed into masonry, green waste is composted. Both are consented processes, and both are why the end use can be named rather than estimated."
+        meta={[
+          { label: "Lines", value: `${productLines.length}, ash and green` },
+          { label: "Products", value: String(products.length) },
+          { label: "Supply", value: "Retail and bulk" },
+        ]}
       />
 
       {/* ══ ash line ══════════════════════════════════════════════ */}

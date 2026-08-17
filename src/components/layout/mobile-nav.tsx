@@ -20,10 +20,10 @@ export function MobileNav({ solid = true }: { solid?: boolean }) {
       <Dialog.Trigger
         aria-label="Open menu"
         className={cn(
-          "flex size-11 items-center justify-center rounded-lg border transition-[transform,background-color,border-color] duration-300 active:translate-y-[2px] active:border-b",
+          "flex size-11 items-center justify-center rounded-lg border transition-[background-color,border-color] duration-300",
           solid
-            ? "border-ink-200 border-b-[3px] border-b-ink-400 bg-white text-green-900"
-            : "border-white/30 border-b-[3px] border-b-white/40 bg-white/10 text-white",
+            ? "border-ink-200 bg-white text-green-900 active:bg-green-50"
+            : "border-white/30 bg-white/10 text-white active:bg-white/20",
         )}
       >
         <MenuIcon className="size-5" aria-hidden="true" />

@@ -15,24 +15,23 @@
    flat tokens, a derived radius scale, and one responsive spacing
    ladder applied through the Section primitive.
 
-   Two deliberate departures, both agreed:
+   One deliberate departure, agreed: the brand sheet says no rounded
+   surfaces, and everything here is rounded, on a derived scale,
+   because unrelieved square corners read as unfinished at screen
+   sizes.
 
-   1. The brand sheet says no rounded surfaces. Everything here is
-      rounded, on a derived scale, because unrelieved square corners
-      read as unfinished at screen sizes.
-   2. Physicality comes from a darker "lip" beneath interactive
-      surfaces which compresses on press. That is a bevel in the
-      strict sense, so it bends the brand's no-bevels line. It does
-      not bend the two rules that actually matter for this brand:
-      NO SHADOWS ANYWHERE, and no gradients. Both are absent, and the
-      lint check in scripts/check-design.mjs enforces it.
+   Otherwise the brand's surface rules hold exactly. NO SHADOWS
+   ANYWHERE, no gradients, no bevels. Buttons briefly carried a
+   pressed-key lip, which was a bevel in the strict sense; it has been
+   removed and the rule now applies with no exceptions. All three are
+   enforced by scripts/check-design.mjs.
    ============================================================ */
 
 @theme {
   /* ---- green ramp -------------------------------------------------
      Anchored on the two brand greens: 600 is FSWS Green #175C25 and
      900 is Pine Deep #0C2E12. 200 is Mist #C5D6C8. The rest are
-     interpolated so lips, hovers and tints all come from one family
+     interpolated so borders, hovers and tints all come from one family
      instead of being invented per component.
      ------------------------------------------------------------------ */
   --color-green-50: #f2f7f3;

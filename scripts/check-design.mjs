@@ -2,15 +2,18 @@
 /**
  * Design rule guard. Runs in `npm run check`.
  *
- * Two rules are absolute for this brand and easy to reintroduce by accident,
+ * Three rules are absolute for this brand and easy to reintroduce by accident,
  * usually by pasting in a shadcn component that ships `shadow-xs` in its
  * variants:
  *
  *   no shadows   any shadow-* utility, box-shadow, or drop-shadow
  *   no gradients any bg-gradient / linear-gradient / radial-gradient
+ *   no bevels    a thick bottom border faking a lip under a control
  *
- * Depth on this site comes from radius, layered borders and a darker lip that
- * compresses on press. If a component seems to need a shadow, it needs a lip.
+ * Everything here is flat. Surfaces are separated by radius, a hairline border
+ * and a tonal step from the colour ramp, and nothing else. Buttons used to be
+ * the one exception, sitting on a pressed-key lip; that is gone, and the rule
+ * now applies everywhere with no allow list.
  */
 import { readdirSync, readFileSync, statSync } from "node:fs";
 import { join, relative } from "node:path";
@@ -19,10 +22,6 @@ const ROOT = new URL("..", import.meta.url).pathname;
 const SCAN = ["src"];
 const EXT = /\.(tsx?|css)$/;
 
-/* Files allowed to use the pressed-key lip. Everything else must stay flat:
-   putting it on cards too made every surface look tappable. */
-const LIP_ALLOWED = ["src/components/ui/button.tsx", "src/components/layout/mobile-nav.tsx"];
-
 /* The header's progressive scrim uses a linear-gradient as a MASK, to fade a
    blur out downward, not as a decorative fill. That is the one legitimate use
    and it is confined to this file. Anywhere else, a gradient is still a bug. */
@@ -30,16 +29,15 @@ const GRADIENT_ALLOWED = ["src/components/layout/header.tsx"];
 
 const RULES = [
   {
-    name: "lip",
+    name: "bevel",
     pattern: /border-[bt]-\[?[23]px?\]?\s|border-[bt]-2\b|border-b-\[3px\]/g,
-    why: "the pressed-key lip is for buttons only: keep other surfaces flat",
-    only: LIP_ALLOWED,
+    why: "no bevels: every surface is flat. Separate things with radius, a hairline border and a tonal step",
   },
   {
     name: "shadow",
     // shadow-none is fine: it is how we strip a shadow off a vendor component
     pattern: /\bshadow-(?!none\b)[a-z0-9[\]/.-]+|box-shadow|drop-shadow|\bring-(?!offset-0\b)[a-z0-9[\]/.-]+/g,
-    why: "no shadows: Tailwind rings compile to box-shadow too. Use radius plus a darker bottom border (a lip), and rely on the global :focus-visible outline",
+    why: "no shadows: Tailwind rings compile to box-shadow too. Use radius and a hairline border, and rely on the global :focus-visible outline",
   },
   {
     name: "gradient",
@@ -84,4 +82,4 @@ if (failures) {
   console.error(`\n${failures} design rule violation(s).`);
   process.exit(1);
 }
-console.log("design rules: no shadows, no gradients, lips on buttons only — clean");
+console.log("design rules: no shadows, no gradients, no bevels — clean");

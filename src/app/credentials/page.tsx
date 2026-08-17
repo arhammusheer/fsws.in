@@ -24,6 +24,11 @@ export default function CredentialsPage() {
         eyebrow="Credentials"
         title="What we are licensed to do, and what we are not"
         lede="Everything below is transcribed from a document that can be produced on request. Where an activity requires a licence FSWS does not hold, that is stated rather than left to be discovered."
+        meta={[
+          { label: "UKPCB CAF", value: consent.cafId },
+          { label: "Application", value: consent.applicationNo },
+          { label: "Valid to", value: consent.validTo },
+        ]}
       />
 
       <Section ground="light">

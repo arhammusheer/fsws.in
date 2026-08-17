@@ -4,6 +4,7 @@ import "./globals.css";
 
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import { PageTransition } from "@/components/layout/page-transition";
 import { site, contact } from "@/content/site";
 import { registrations } from "@/content/credentials";
 import { HEADER_OFFSET } from "@/lib/layout";
@@ -94,13 +95,18 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           Skip to content
         </a>
-        <Header />
-        {/* clears the fixed header; the homepage cancels this with a
-            negative margin so its first screen starts at the true top */}
-        <main id="main" className={`flex-1 ${HEADER_OFFSET}`}>
-          {children}
-        </main>
-        <Footer />
+        {/* Everything the transition clips has to sit inside it, header and
+            footer included, or the page opens out from the corner with a bar
+            already painted across the top. */}
+        <PageTransition>
+          <Header />
+          {/* clears the fixed header; the homepage cancels this with a
+              negative margin so its first screen starts at the true top */}
+          <main id="main" className={`flex-1 ${HEADER_OFFSET}`}>
+            {children}
+          </main>
+          <Footer />
+        </PageTransition>
       </body>
     </html>
   );

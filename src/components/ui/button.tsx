@@ -5,26 +5,25 @@ import { Slot } from "radix-ui";
 import { cn } from "@/lib/utils";
 
 /**
- * Buttons carry the physicality of the whole site, so the technique is worth
- * stating once here.
+ * Flat buttons. One hairline border, a fill, a hover tint, and nothing else.
  *
- * Each button sits on a "lip": a thicker bottom border in the next darker step
- * of its own colour ramp. That reads as a key with a side wall. Pressing it
- * collapses the lip to 1px and translates the button down by the difference, so
- * the top face travels while the base stays put and the key looks depressed.
+ * These used to carry a "lip": a thicker bottom border in the next darker step
+ * of the ramp, collapsing to 1px on press with a matching translate, so the key
+ * looked depressed. It is gone. Nothing on this site is pretending to be a
+ * physical object any more, and a bevel on the only interactive element made
+ * the buttons the odd thing out rather than the confident thing.
  *
- * There are NO SHADOWS. Not on the button, not on hover, not on focus. The
- * depth is entirely border and translation, which is also why it stays crisp at
- * any zoom and never smudges over the video hero.
+ * There are NO SHADOWS, and now no bevels either. The whole surface treatment
+ * is border, radius and fill, which is why it stays crisp at any zoom and never
+ * smudges over the video hero.
  *
- * Sizes keep the total height stable across the press by pairing the border
- * change with an equal translate, so a pressed button never nudges its
- * neighbours.
+ * Feedback on press is a tint change only. Height is constant in every state,
+ * so a pressed button never nudges its neighbours and the row never reflows.
  *
- * There is no `focus-visible:ring-*` either. Tailwind implements rings with
- * box-shadow, so a ring would smuggle a shadow back in. The focus indicator is
- * the `:focus-visible` outline set globally in globals.css, which is the
- * modern, non-shadow way to draw one and follows the element's border-radius.
+ * There is no `focus-visible:ring-*`. Tailwind implements rings with box-shadow,
+ * so a ring would smuggle a shadow back in. The focus indicator is the
+ * `:focus-visible` outline set globally in globals.css, which is the modern,
+ * non-shadow way to draw one and follows the element's border-radius.
  *
  * background-color is deliberately NOT transitioned. Swapping variant (the
  * header does it on scroll) is a state change rather than an animation, and
@@ -35,42 +34,38 @@ const buttonVariants = cva(
   [
     "relative inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap",
     "font-bold tracking-[-0.01em] select-none",
-    "transition-[transform,border-color] duration-100 ease-out",
+    "transition-[border-color] duration-100 ease-out",
     "disabled:pointer-events-none disabled:opacity-50",
     "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
   ].join(" "),
   {
     variants: {
       variant: {
-        /** Solid green key. The default call to action. */
+        /** Solid green. The default call to action. */
         primary: [
-          "bg-green-600 text-white border border-green-800",
-          "border-b-[3px] border-b-green-900",
-          "hover:bg-green-500",
-          "active:translate-y-[2px] active:border-b",
+          "bg-green-600 text-white border border-green-700",
+          "hover:bg-green-500 hover:border-green-600",
+          "active:bg-green-700 active:border-green-800",
         ].join(" "),
-        /** For dark grounds: a white key with a cool grey base. */
+        /** For dark grounds: solid white. */
         light: [
-          "bg-white text-green-900 border border-ink-200",
-          "border-b-[3px] border-b-ink-400",
-          "hover:bg-green-50",
-          "active:translate-y-[2px] active:border-b",
+          "bg-white text-green-900 border border-white",
+          "hover:bg-green-50 hover:border-green-50",
+          "active:bg-green-100 active:border-green-100",
         ].join(" "),
-        /** Outlined, still lipped so it feels like the same family. */
+        /** Outlined, on light grounds. */
         outline: [
           "bg-white text-green-900 border border-ink-200",
-          "border-b-[3px] border-b-ink-200",
           "hover:bg-green-50 hover:border-green-300",
-          "active:translate-y-[2px] active:border-b",
+          "active:bg-green-100 active:border-green-300",
         ].join(" "),
-        /** Outlined for dark grounds. */
+        /** Outlined, on dark grounds. */
         ghostLight: [
           "bg-transparent text-white border border-white/30",
-          "border-b-[3px] border-b-white/40",
           "hover:bg-white/10 hover:border-white/50",
-          "active:translate-y-[2px] active:border-b",
+          "active:bg-white/20 active:border-white/60",
         ].join(" "),
-        /** Inline text action. No lip: it is not a surface. */
+        /** Inline text action. Not a surface at all. */
         link: "text-green-600 underline-offset-4 hover:underline font-bold",
       },
       size: {

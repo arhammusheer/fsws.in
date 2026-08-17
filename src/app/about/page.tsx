@@ -29,6 +29,11 @@ export default function AboutPage() {
         eyebrow="About"
         title="A processing site, not a transfer station"
         lede={`Incorporated in ${site.founded} and operating from Haridwar, Uttarakhand. Composting and ash based manufacture happen on our own site under our own consent, which is what lets us name an end use rather than estimate one.`}
+        meta={[
+          { label: "Incorporated", value: site.founded },
+          { label: "Site", value: `${site.locality}, ${site.region}` },
+          { label: "Consent valid to", value: consent.validTo },
+        ]}
       />
 
       <Section ground="light">

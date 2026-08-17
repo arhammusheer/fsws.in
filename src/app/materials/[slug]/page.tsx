@@ -38,6 +38,17 @@ export default async function StreamPage({ params }: PageProps<"/materials/[slug
         eyebrow={`Stream ${stream.index}`}
         title={stream.qualifier ? `${stream.name}, ${stream.qualifier}` : stream.name}
         lede={stream.summary}
+        meta={[
+          { label: "End use", value: stream.endUse },
+          {
+            label: "Processed by",
+            value: inHouse ? "FSWS, Haridwar" : stream.certifier,
+          },
+          {
+            label: "Certificate",
+            value: inHouse ? "Issued by FSWS" : "Forwarded unaltered",
+          },
+        ]}
       />
 
       <Section ground="light">
