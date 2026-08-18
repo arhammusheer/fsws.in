@@ -195,7 +195,7 @@ function Tile({
         {children}
       </div>
       <figcaption className="border-t border-ink-200 p-3">
-        <p className="flex items-center gap-1.5 text-xs font-bold text-[#b42318]">
+        <p className="flex items-center gap-1.5 text-xs font-bold text-destructive">
           <XIcon aria-hidden="true" className="size-3.5 shrink-0" />
           {label}
         </p>

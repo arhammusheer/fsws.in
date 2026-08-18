@@ -93,6 +93,9 @@
   --muted-foreground: var(--color-ink-600);
   --accent: var(--color-green-50);
   --accent-foreground: var(--color-green-900);
+  /* The brand's Violation swatch. Named here so error text uses the token
+     rather than the literal, which is how two components ended up with the
+     same hex pasted into an arbitrary Tailwind value. */
   --destructive: #b42318;
   --border: var(--color-ink-200);
   --input: var(--color-ink-200);

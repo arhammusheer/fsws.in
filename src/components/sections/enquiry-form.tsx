@@ -96,7 +96,7 @@ export function EnquiryForm() {
       </div>
 
       {error ? (
-        <p role="alert" className="text-sm text-[#b42318]">{error}</p>
+        <p role="alert" className="text-sm text-destructive">{error}</p>
       ) : null}
 
       <div className="flex flex-wrap items-center gap-6">

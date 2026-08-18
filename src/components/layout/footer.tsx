@@ -90,6 +90,10 @@ export function Footer() {
 
         <Rule className="mt-14" />
 
+        {/* Labels are green-200/70, not /60. At /60 on this ground they measure
+            4.46:1, which is under AA for text this size. The same /60 is fine
+            on the homepage strip because that sits on green-950, a darker
+            ground, where it comes out at 4.76. */}
         <div className="mt-8 flex flex-col gap-4 text-xs text-green-200 md:flex-row md:items-center md:justify-between">
           <p>&copy; {new Date().getFullYear()} {site.legalName}</p>
           <ul className="flex flex-wrap gap-x-6 gap-y-2 font-mono">
@@ -97,12 +101,12 @@ export function Footer() {
               .filter((r) => ["CIN", "GSTIN", "Udyam registration"].includes(r.label))
               .map((r) => (
                 <li key={r.label}>
-                  <span className="text-green-200/60">{r.label} </span>
+                  <span className="text-green-200/70">{r.label} </span>
                   {r.value}
                 </li>
               ))}
             <li>
-              <span className="text-green-200/60">UKPCB CAF </span>
+              <span className="text-green-200/70">UKPCB CAF </span>
               {consent.cafId}
             </li>
           </ul>
