@@ -4,6 +4,9 @@ import { streams } from "@/content/streams";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
+  // /brand is deliberately absent. It is noindex, and listing a noindex URL in
+  // a sitemap asks a crawler to fetch a page and then tells it to forget what
+  // it found, which is how a site accumulates coverage warnings.
   const routes = [
     { path: "", priority: 1 },
     { path: "/materials", priority: 0.9 },

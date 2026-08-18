@@ -44,7 +44,14 @@ export function Footer() {
               Site
             </p>
             <ul className="mt-4 flex flex-col gap-2.5">
-              {[...nav, { label: "Contact", href: "/contact" }].map((item) => (
+              {[
+                ...nav,
+                { label: "Contact", href: "/contact" },
+                // The brand guide is noindex and out of the primary nav: a working
+                // reference for whoever makes FSWS documents, not a page competing
+                // with the site. The footer is where you go looking for it.
+                { label: "Brand", href: "/brand" },
+              ].map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
