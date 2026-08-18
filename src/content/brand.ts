@@ -119,9 +119,18 @@ export const typefaces = [
  * Two faces, and the split between them is the brand's argument in miniature:
  * Manrope for what the company says, JetBrains Mono for what it can prove.
  */
+/**
+ * Tracking is given in px, as the source gives it, not converted to em.
+ *
+ * Converting was a mistake once already: -0.5px at 22px is -0.023em and it was
+ * transcribed as -0.015em, which is a third of the intended tightening. The
+ * people setting these values are working in Word and PowerPoint, where the
+ * control is in points and pixels, so px is both the accurate transcription and
+ * the usable one.
+ */
 export const scale = [
-  { label: "Page title", face: "Manrope 800", detail: "36px, tracking −0.025em" },
-  { label: "Section header", face: "Manrope 700", detail: "22px, tracking −0.015em" },
+  { label: "Page title", face: "Manrope 800", detail: "36px, tracking −1px" },
+  { label: "Section header", face: "Manrope 700", detail: "22px, tracking −0.5px" },
   { label: "Body", face: "Manrope 400", detail: "15px, line height 1.6" },
   { label: "Data", face: "JetBrains Mono 400", detail: "15px, tabular figures" },
 ] as const;

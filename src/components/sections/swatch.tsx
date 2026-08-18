@@ -77,8 +77,14 @@ export function Swatch({ swatch }: { swatch: SwatchType }) {
         </span>
         <span
           className={cn(
+            // Measured, not chosen. This line is text-xs, so it needs 4.5:1
+            // against its own chip. At white/70 the Violation chip came out at
+            // 3.89 and at ink-600 the Gray chip came out at 4.04: both are the
+            // most saturated member of their half of the palette, and both
+            // failed. white/80 puts the worst reversed chip at 4.68 and ink-900
+            // puts the worst light one at 6.92.
             "mt-1.5 block text-xs leading-snug",
-            swatch.reverse ? "text-white/70" : "text-ink-600",
+            swatch.reverse ? "text-white/80" : "text-ink-900",
           )}
         >
           {swatch.use}
