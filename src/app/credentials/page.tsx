@@ -85,7 +85,7 @@ export default function CredentialsPage() {
           <div className="grid gap-10 lg:grid-cols-[18rem_1fr] lg:gap-16">
             <div>
               <SectionHeader eyebrow="Scope" title="Licences held by others" as="h2" />
-              <p className="mt-5 text-sm text-ink-600">
+              <p className="mt-5 max-w-[56ch] text-sm text-ink-600">
                 Where FSWS is not the licensed party, the licensed party performs the recovery and
                 issues the certificate. FSWS forwards it unaltered, with the consignment reference attached.
               </p>

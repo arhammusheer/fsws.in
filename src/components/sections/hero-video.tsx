@@ -15,7 +15,17 @@ import Image from "next/image";
  *
  * Not loaded when: the visitor prefers reduced motion, the viewport is under
  * 768px where a full-bleed video costs mobile data for something mostly hidden
- * behind the overlay, or the browser reports Save-Data.
+ * behind the overlay, the browser reports Save-Data, or the connection is
+ * reported as 2g or 3g. The footage is 2 to 3.7 MB and the still says the same
+ * thing; on a link that slow the video would arrive after the reader had gone.
+ *
+ * The video carries NO `poster`. It is layered over the Image above, which is
+ * the same frame, and a video element with no frames yet is transparent, so
+ * the still shows through and there is nothing to hand over. Setting `poster`
+ * as well made the browser fetch that JPEG a second time, raw and unoptimised:
+ * 352 kB through next/image plus 356 kB for the poster attribute, 708 kB for
+ * one still, and the duplicate landed hardest on exactly the connections it
+ * was supposed to be helping.
  *
  * The overlay is a flat fill, never a gradient scrim. Its opacity is measured,
  * not chosen by eye: the hero is about 2.06:1 against 16:9 source, so
@@ -40,9 +50,17 @@ function subscribe(onChange: () => void) {
 function getSnapshot() {
   if (!window.matchMedia(MOTION_QUERY).matches) return false;
   const connection = (
-    navigator as Navigator & { connection?: { saveData?: boolean } }
+    navigator as Navigator & {
+      connection?: { saveData?: boolean; effectiveType?: string };
+    }
   ).connection;
-  return !connection?.saveData;
+  if (connection?.saveData) return false;
+  // effectiveType is a measurement of the link, not a label for the radio, so
+  // it catches a stalled wifi as well as a slow cell.
+  if (connection?.effectiveType && /(^|-)[23]g$/.test(connection.effectiveType)) {
+    return false;
+  }
+  return true;
 }
 
 function getServerSnapshot() {
@@ -75,7 +93,6 @@ export function HeroVideo() {
           loop
           playsInline
           preload="auto"
-          poster="/assets/hero/hero-poster.jpg"
           className="absolute inset-0 size-full object-cover"
         >
           <source

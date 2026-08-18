@@ -154,8 +154,8 @@ export default function BrandPage() {
             ))}
           </div>
 
-          <Panel tone="tint" radius="xl" className="mt-14 max-w-[74ch] p-6">
-            <p className="text-sm text-ink-600">
+          <Panel tone="tint" radius="xl" className="mt-14 p-6">
+            <p className="max-w-[56ch] text-sm text-ink-600">
               No bright, neon or lime greens. They read as consumer software and undermine
               the industrial credibility the rest of the system is built on. The forest
               tones above are the whole green range.

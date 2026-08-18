@@ -64,8 +64,8 @@ export default function ProductsPage() {
 
           {/* Sits with the ash line because both standards it names are
               masonry standards. */}
-          <Panel tone="tint" radius="xl" className="mt-16 max-w-[74ch] p-6 lg:mt-20">
-            <p className="text-sm text-ink-600">
+          <Panel tone="tint" radius="xl" className="mt-16 p-6 lg:mt-20">
+            <p className="max-w-[56ch] text-sm text-ink-600">
               No strength or durability figure is published here. Blocks are tested against
               IS 2185 (Part 1) and IS 12894 as the product class requires, and results for a given
               production lot are available on request. Where a specification needs to be met, tell us
