@@ -30,6 +30,12 @@ const EXT = /\.(tsx?|css)$/;
    band it was dissolving has been removed entirely. */
 const GRADIENT_ALLOWED = ["src/components/layout/header.tsx"];
 
+/* The brand page renders the prohibitions rather than describing them: a mark
+   with a drop-shadow on it, so a reader can recognise the mistake when they see
+   it. The one file whose job is showing what a shadow looks like has to be
+   allowed to draw one. Everywhere else the rule is absolute. */
+const MISUSE_DEMO = ["src/components/sections/logo-rules.tsx"];
+
 const RULES = [
   {
     name: "bevel",
@@ -41,6 +47,7 @@ const RULES = [
     // shadow-none is fine: it is how we strip a shadow off a vendor component
     pattern: /\bshadow-(?!none\b)[a-z0-9[\]/.-]+|box-shadow|drop-shadow|\bring-(?!offset-0\b)[a-z0-9[\]/.-]+/g,
     why: "no shadows: Tailwind rings compile to box-shadow too. Use radius and a hairline border, and rely on the global :focus-visible outline",
+    only: MISUSE_DEMO,
   },
   {
     name: "gradient",

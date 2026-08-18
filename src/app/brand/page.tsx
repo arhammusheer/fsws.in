@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { CheckIcon, XIcon } from "lucide-react";
+import { CheckIcon } from "lucide-react";
 
 import { PageHero } from "@/components/layout/page-hero";
 import { Container, Label, Section, SectionHeader } from "@/components/layout/section";
 import { Panel } from "@/components/ui/panel";
 import { Swatch } from "@/components/sections/swatch";
+import { ClearSpace, Misuse } from "@/components/sections/logo-rules";
 import { logoRules, logos, palette, scale, typefaces } from "@/content/brand";
+import { contact, site } from "@/content/site";
 import { pageMetadata } from "@/lib/seo";
 
 /**
@@ -89,11 +91,21 @@ export default function BrandPage() {
             ))}
           </ul>
 
-          <div className="mt-10 grid gap-5 lg:grid-cols-[1fr_1fr] lg:gap-6">
+          <div className="mt-10 grid gap-5 lg:grid-cols-2 lg:gap-6">
+            <ClearSpace />
+
             <Panel tone="plain" radius="xl" className="p-6 lg:p-7">
-              <Label>Clear space and minimums</Label>
-              <p className="mt-4 max-w-[52ch] text-ink-900">{logoRules.clearSpace}</p>
-              <dl className="mt-6 grid grid-cols-2 gap-4">
+              <Label>Do</Label>
+              <ul className="mt-4 space-y-2.5">
+                {logoRules.do.map((rule) => (
+                  <li key={rule} className="flex gap-2.5 text-sm text-ink-900">
+                    <CheckIcon aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-green-600" />
+                    {rule}
+                  </li>
+                ))}
+              </ul>
+
+              <dl className="mt-8 grid grid-cols-2 gap-4">
                 {logoRules.minimums.map((m) => (
                   <div key={m.label} className="border-t border-ink-200 pt-3">
                     <dt className="text-[0.7rem] font-bold tracking-[0.16em] text-green-600 uppercase">
@@ -105,33 +117,10 @@ export default function BrandPage() {
                 ))}
               </dl>
             </Panel>
+          </div>
 
-            <Panel tone="plain" radius="xl" className="p-6 lg:p-7">
-              <div className="grid gap-8 sm:grid-cols-2">
-                <div>
-                  <Label>Do</Label>
-                  <ul className="mt-4 space-y-2.5">
-                    {logoRules.do.map((rule) => (
-                      <li key={rule} className="flex gap-2.5 text-sm text-ink-900">
-                        <CheckIcon aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-green-600" />
-                        {rule}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div>
-                  <Label>Do not</Label>
-                  <ul className="mt-4 space-y-2.5">
-                    {logoRules.dont.map((rule) => (
-                      <li key={rule} className="flex gap-2.5 text-sm text-ink-600">
-                        <XIcon aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-[#b42318]" />
-                        {rule}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </Panel>
+          <div className="mt-10">
+            <Misuse />
           </div>
         </Container>
       </Section>
@@ -225,9 +214,69 @@ export default function BrandPage() {
               ))}
             </dl>
             <p className="mt-6 max-w-[62ch] text-sm text-ink-600">
-              Nothing outside these three. Arial, Calibri and Times New Roman in an FSWS
+              Nothing outside these two. Arial, Calibri and Times New Roman in an FSWS
               document say more about the company than the document does.
             </p>
+          </div>
+        </Container>
+      </Section>
+
+      {/* ══ use and machine readable ══════════════════════════════ */}
+      <Section ground="light" id="use">
+        <Container>
+          <div className="grid gap-10 lg:grid-cols-2 lg:gap-6">
+            <Panel tone="plain" radius="xl" className="p-6 lg:p-8">
+              <Label>Trademark</Label>
+              <h2 className="mt-4 text-xl font-extrabold tracking-[-0.015em] text-green-900">
+                The mark is registered
+              </h2>
+              <p className="mt-4 max-w-[52ch] text-sm leading-relaxed text-ink-600">
+                The FSWS mark is a registered trademark of {site.legalName}. It is
+                published here so that partners, clients and contractors can reproduce it
+                correctly, and for no other purpose.
+              </p>
+              <p className="mt-4 max-w-[52ch] text-sm leading-relaxed text-ink-600">
+                It may be used to refer to the company, or to identify it as a supplier or
+                a customer. It may not be altered, incorporated into another mark, or used
+                in any way that implies an endorsement, a partnership or a certification
+                that does not exist. Reproduce it from the files above, unmodified.
+              </p>
+              <p className="mt-5 text-sm text-ink-600">
+                Anything not covered here:{" "}
+                <a
+                  href={`mailto:${contact.email}`}
+                  className="rounded-sm font-mono text-green-600 underline-offset-4 hover:underline"
+                >
+                  {contact.email}
+                </a>
+              </p>
+            </Panel>
+
+            <Panel tone="plain" radius="xl" className="p-6 lg:p-8">
+              <Label>Machine readable</Label>
+              <h2 className="mt-4 text-xl font-extrabold tracking-[-0.015em] text-green-900">
+                The same thing, as data
+              </h2>
+              <p className="mt-4 max-w-[52ch] text-sm leading-relaxed text-ink-600">
+                This page is for reading. Everything on it is also served as one JSON
+                file, so a design tool, a template script or a language model asked to
+                draft something for FSWS can take the values rather than be told them
+                from memory, which is how the wrong green ends up in a deck.
+              </p>
+              <p className="mt-4 max-w-[52ch] text-sm leading-relaxed text-ink-600">
+                Colour and type follow the W3C Design Tokens format, so Style Dictionary
+                and Figma read it unaided. The logo files, the trademark position and the
+                company&apos;s registered identity sit under <code className="font-mono text-[0.8rem]">$extensions</code>.
+                It is generated from the same source as this page and cannot fall out of
+                step with it.
+              </p>
+              <a
+                href="/brand/tokens.json"
+                className="mt-6 inline-flex items-center gap-2 rounded-lg border border-ink-200 px-4 py-2.5 font-mono text-sm text-green-900 transition-colors hover:bg-green-50"
+              >
+                /brand/tokens.json
+              </a>
+            </Panel>
           </div>
         </Container>
       </Section>
