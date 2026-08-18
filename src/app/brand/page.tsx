@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { Playfair_Display } from "next/font/google";
 import { CheckIcon, XIcon } from "lucide-react";
 
 import { PageHero } from "@/components/layout/page-hero";
@@ -19,27 +18,15 @@ import { pageMetadata } from "@/lib/seo";
  * phone openers on the old one had already been overtaken by this site, and
  * anyone following both would have written two different companies.
  *
+ * Playfair Display and the accents group went the same way, on the evidence
+ * that nothing had ever used them. content/brand.ts records why, so the case
+ * is on file rather than in someone's memory.
+ *
  * It is noindex. This is a working reference for people who make FSWS
  * documents, not a page that should compete with the site in a search result
  * for the company's own name. It stays linked from the footer so it can be
  * found by anyone who needs it.
  */
-
-/**
- * Playfair is loaded HERE and nowhere else.
- *
- * The brand reserves it for executive narrative and this site has none, so it
- * is deliberately absent from the root layout: shipping a display face to every
- * visitor for a specimen block on one page would be paying for it on every
- * page. Scoped to this route, Next only serves it to whoever opens the guide.
- */
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["500"],
-  style: ["normal"],
-  display: "swap",
-  variable: "--font-playfair",
-});
 
 export const metadata: Metadata = {
   ...pageMetadata({
@@ -49,12 +36,6 @@ export const metadata: Metadata = {
     path: "/brand",
   }),
   robots: { index: false, follow: true },
-};
-
-const specimenFace: Record<string, string> = {
-  manrope: "font-sans",
-  playfair: playfair.className,
-  mono: "font-mono",
 };
 
 export default function BrandPage() {
@@ -161,7 +142,7 @@ export default function BrandPage() {
           <SectionHeader
             eyebrow="02"
             title="The palette"
-            lede="Colour is used for control, status and clarity, not decoration. Roughly six parts neutral, three parts green, one part accent. Every chip copies its own hex."
+            lede="Colour is used for control, status and clarity, never decoration. Broadly six parts neutral to three parts green, with status carrying the rest. Every chip copies its own hex."
           />
 
           <div className="mt-12 flex flex-col gap-14 lg:mt-16 lg:gap-16">
@@ -200,7 +181,7 @@ export default function BrandPage() {
           <SectionHeader
             eyebrow="03"
             title="The type"
-            lede="Three faces, each with a job. Type is a control surface here: it is what makes a document read as accurate before a word of it is understood."
+            lede="Two faces. Manrope for what the company says, JetBrains Mono for what it can prove. Type is a control surface here: it is what makes a document read as accurate before a word of it is understood."
           />
 
           <div className="mt-12 flex flex-col gap-5 lg:mt-16">
@@ -214,14 +195,9 @@ export default function BrandPage() {
                     </h3>
                     <p className="mt-2 font-mono text-xs text-ink-600">{face.weights}</p>
                     <p className="mt-4 max-w-[42ch] text-sm text-ink-600">{face.use}</p>
-                    {face.never ? (
-                      <p className="mt-3 max-w-[42ch] text-sm font-bold text-[#b42318]">
-                        {face.never}
-                      </p>
-                    ) : null}
                   </div>
                   <p
-                    className={`self-center text-[1.75rem] leading-[1.15] text-green-900 sm:text-[2.25rem] ${specimenFace[face.id]}`}
+                    className={`self-center text-[1.75rem] leading-[1.15] text-green-900 sm:text-[2.25rem] ${face.id === "mono" ? "font-mono" : "font-sans"}`}
                   >
                     {face.specimen}
                   </p>

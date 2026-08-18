@@ -10,6 +10,26 @@ import { validate } from "./schema";
  * company had settled what it says, and all of it now contradicted by the site
  * you are reading. Only the three survive here.
  *
+ * Two things were cut from those three as well, both for the same reason: they
+ * had never been used by anything.
+ *
+ * PLAYFAIR DISPLAY was reserved for executive narrative. The reserve was never
+ * drawn on. The Material End-Use Statement is exactly the surface it was
+ * written for, a formal document sent to a client's procurement team, and it
+ * embeds Manrope and JetBrains Mono only; the website does the same. A rule
+ * nobody exercises has no precedent to copy, so the first person to reach for
+ * it applies it wrong while following the guide. It also argued against the
+ * positioning: a display serif says the company has a view about beauty, and
+ * two faces say it is precise. Where a letter or a report pull needs weight,
+ * the answer is Manrope at size with the tracking pulled in.
+ *
+ * THE ACCENTS GROUP held River Blue and Earth Sand for "charts and data
+ * visualisation". There are no charts. Earth Sand is gone; River Blue moved
+ * into Status as Information, which is the one job it was actually doing.
+ *
+ * Do not restore either from brand.fsws.in. They were removed on the evidence,
+ * not overlooked.
+ *
  * These hex values are the SOURCE, not a copy of globals.css. The site's ramp
  * is interpolated between the brand greens to give hover states and tints a
  * family to come from, so its intermediate steps are derived and will not all
@@ -58,19 +78,13 @@ export const palette = validate(
       ],
     },
     {
-      title: "Accents",
-      note: "Charts, data and secondary highlights. Roughly a tenth of any layout, never more.",
-      swatches: [
-        { name: "River Blue", hex: "#0B4F6C", use: "Charts, information states, links", reverse: true },
-        { name: "Earth Sand", hex: "#C9B79C", use: "Secondary accents, earth tones" },
-      ],
-    },
-    {
       title: "Status",
-      note: "Traffic-light logic, and it has to mean the same thing in every document.",
+      note: "Traffic-light logic, and it has to mean the same thing in every document. Only these four carry meaning; nothing else in the system is allowed to.",
       swatches: [
         { name: "Compliant", hex: "#175C25", use: "Approved, complete, on track", reverse: true },
-        { name: "Processed", hex: "#0B4F6C", use: "Information, in progress", reverse: true },
+        // Formerly River Blue in the accents group. Information was the only
+        // job it ever had, so it is filed under the job.
+        { name: "Information", hex: "#0B4F6C", use: "In progress, processed, informational", reverse: true },
         { name: "Risk", hex: "#F59E0B", use: "Caution, attention needed" },
         { name: "Violation", hex: "#B42318", use: "Error, breach, urgent", reverse: true },
       ],
@@ -88,18 +102,8 @@ export const typefaces = [
     role: "Primary sans",
     name: "Manrope",
     weights: "300 to 800",
-    use: "Body copy, headings, interface, captions. Everything unless a rule below applies.",
+    use: "Body copy, headings, interface, captions. Everything that is not a number you could be held to.",
     specimen: "Waste management that survives an audit",
-    never: null,
-  },
-  {
-    id: "playfair",
-    role: "Executive serif",
-    name: "Playfair Display",
-    weights: "500",
-    use: "Mission and vision statements, leadership letters, annual report pulls.",
-    specimen: "Responsibility begins at the source.",
-    never: "Never for tables, labels or interface.",
   },
   {
     id: "mono",
@@ -108,10 +112,13 @@ export const typefaces = [
     weights: "400 to 500",
     use: "Identifiers, manifest numbers, weights, dates, measurements. Anywhere precision is implied.",
     specimen: "U37100UR2019PTC010043",
-    never: null,
   },
 ] as const;
 
+/**
+ * Two faces, and the split between them is the brand's argument in miniature:
+ * Manrope for what the company says, JetBrains Mono for what it can prove.
+ */
 export const scale = [
   { label: "Page title", face: "Manrope 800", detail: "36px, tracking −0.025em" },
   { label: "Section header", face: "Manrope 700", detail: "22px, tracking −0.015em" },
