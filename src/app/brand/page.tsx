@@ -36,7 +36,7 @@ import { pageMetadata } from "@/lib/seo";
 const playfair = Playfair_Display({
   subsets: ["latin"],
   weight: ["500"],
-  style: ["italic", "normal"],
+  style: ["normal"],
   display: "swap",
   variable: "--font-playfair",
 });
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
 
 const specimenFace: Record<string, string> = {
   manrope: "font-sans",
-  playfair: `${playfair.className} italic`,
+  playfair: playfair.className,
   mono: "font-mono",
 };
 
