@@ -266,7 +266,7 @@ export default function BrandPage() {
               <p className="mt-4 max-w-[52ch] text-sm leading-relaxed text-ink-600">
                 Colour and type follow the W3C Design Tokens format, so Style Dictionary
                 and Figma read it unaided. The logo files, the trademark position and the
-                company&apos;s registered identity sit under <code className="font-mono text-[0.8rem]">$extensions</code>.
+                company’s registered identity sit under <code className="font-mono text-[0.8rem]">$extensions</code>.
                 It is generated from the same source as this page and cannot fall out of
                 step with it.
               </p>

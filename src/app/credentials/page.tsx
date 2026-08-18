@@ -126,7 +126,7 @@ export default function CredentialsPage() {
               <p className="mt-8 max-w-[52ch] text-sm text-ink-600">
                 The Haridwar facility and the consignment records are open to inspection. Visits to a
                 receiving mill or recycler can be arranged. Copies of the consent, and of downstream
-                partners{"'"} registrations, are provided on request and reissued on renewal or change of partner.
+                partners’ registrations, are provided on request and reissued on renewal or change of partner.
               </p>
               <Button asChild variant="outline" size="sm" className="mt-6">
                 <Link href="/contact">Request documents</Link>

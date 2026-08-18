@@ -82,8 +82,8 @@ export function ClearSpace() {
     <Panel tone="plain" radius="xl" className="flex h-full flex-col p-6 lg:p-7">
       <Label>Clear space</Label>
       <p className="mt-4 max-w-[46ch] text-sm text-ink-600">
-        A margin on all sides equal to a quarter of the inner circle&apos;s
-        diameter. On this artwork that is 12.2 per cent of the mark&apos;s
+        A margin on all sides equal to a quarter of the inner circle’s
+        diameter. On this artwork that is 12.2 per cent of the mark’s
         height, which is the easier way to apply it.
       </p>
 

@@ -5,6 +5,7 @@ import "./globals.css";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { PageTransition } from "@/components/layout/page-transition";
+import { RoutePrefetch } from "@/components/layout/route-prefetch";
 import { site, contact } from "@/content/site";
 import { registrations } from "@/content/credentials";
 import { HEADER_OFFSET } from "@/lib/layout";
@@ -147,6 +148,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         {/* Everything the transition clips has to sit inside it, header and
             footer included, or the page opens out from the corner with a bar
             already painted across the top. */}
+        {/* Warms the client router cache with every route once idle. */}
+        <RoutePrefetch />
         <PageTransition>
           <Header />
           {/* clears the fixed header; the homepage cancels this with a

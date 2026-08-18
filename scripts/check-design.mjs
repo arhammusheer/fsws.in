@@ -50,6 +50,16 @@ const RULES = [
     only: MISUSE_DEMO,
   },
   {
+    name: "apostrophe",
+    // U+0027 between letters is a typewriter apostrophe in prose. The site is
+    // set in a proper text face and reads as sloppy with it; the escapes are
+    // how it gets in, since JSX makes the straight one the path of least
+    // resistance. Code, regexes and class names are unaffected: this only
+    // matches the escaped forms people reach for in copy.
+    pattern: /&apos;|&#39;|\{"'"\}/g,
+    why: "use a typographic apostrophe (\u2019) in copy, not the straight one",
+  },
+  {
     name: "gradient",
     pattern: /\bbg-gradient-|linear-gradient|radial-gradient|conic-gradient/g,
     why: "no gradients: use a flat fill or a tonal step from the colour ramp",
@@ -92,4 +102,4 @@ if (failures) {
   console.error(`\n${failures} design rule violation(s).`);
   process.exit(1);
 }
-console.log("design rules: no shadows, no gradients, no bevels — clean");
+console.log("design rules: no shadows, no gradients, no bevels, no straight apostrophes — clean");

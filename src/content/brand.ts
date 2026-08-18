@@ -72,7 +72,10 @@ export const palette = validate(
         { name: "Mint 100", hex: "#E8EFE9", use: "Panels, sidebars, secondary areas" },
         { name: "Mist 200", hex: "#C5D6C8", use: "Dividers, subtle fills, borders" },
         { name: "White", hex: "#FFFFFF", use: "Cards, print surfaces, content areas" },
-        { name: "Gray", hex: "#94A3B8", use: "Secondary text, captions" },
+        // Renamed from the source's "Gray". Every other word on this site is
+        // British, including "greyscale" two sections down, and a swatch name
+        // is the one thing here a person types out. The hex is untouched.
+        { name: "Grey", hex: "#94A3B8", use: "Secondary text, captions" },
         { name: "Industrial Slate", hex: "#334155", use: "Charts, neutral text, labels", reverse: true },
         { name: "Charcoal", hex: "#111827", use: "Primary body text on light grounds", reverse: true },
       ],
@@ -170,7 +173,7 @@ export const logoRules = {
     "Outline it or alter its stroke weights",
     "Place it on a busy background with no backing panel",
   ],
-  clearSpace: "A margin on all sides equal to a quarter of the inner circle's diameter.",
+  clearSpace: "A margin on all sides equal to a quarter of the inner circle\u2019s diameter.",
   minimums: [
     { label: "Screen", value: "24px", unit: "height" },
     { label: "Print", value: "10mm", unit: "height" },
