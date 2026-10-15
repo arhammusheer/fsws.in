@@ -68,7 +68,7 @@ export function Footer() {
                   className="rounded-sm text-sm text-white/90 transition-colors hover:text-white"
                 >
                   Company profile
-                  <span className="ml-2 font-mono text-xs text-green-200">PDF · 1.9 MB</span>
+                  <span className="ml-2 font-mono text-xs text-green-200">PDF</span>
                 </a>
               </li>
             </ul>
